@@ -35,7 +35,7 @@ public class Util {
     public static URLClassLoader removeOldFileFromClassPath(URLClassLoader sysloader) {
         URL[] urls = new URL[sysloader.getURLs().length - 1];
         for (int i = 0, j = 0; i < sysloader.getURLs().length; i++, j++) {
-            if (sysloader.getURLs()[i].toString().endsWith("jPerturb/target/classes/"))
+            if (sysloader.getURLs()[i].toString().endsWith(System.getProperty("user.dir")+"/target/classes/"))
                 j--;
             else
                 urls[j] = sysloader.getURLs()[i];
