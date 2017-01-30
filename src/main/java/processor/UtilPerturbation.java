@@ -290,7 +290,7 @@ public class UtilPerturbation {
 				}
 
 				//Put the static block in first statement
-				SourcePosition position = factory.Core().createSourcePosition(clazz.getPosition().getCompilationUnit(), -1, -1, 1, new int[0]);
+				SourcePosition position = factory.Core().createSourcePosition(clazz.getPosition().getCompilationUnit(), -1, -1,new int[0]);
 
 				getInstance().staticBlockByClass.get(currentKey).setPosition(position);
 				anonymousExecutables.add(getInstance().staticBlockByClass.get(currentKey));
