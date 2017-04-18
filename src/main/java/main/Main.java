@@ -62,12 +62,12 @@ public class Main {
 
 		System.out.println(UtilPerturbation.perturbableTypes);
 
-		String input = "";
+		String inputPath = "";
 		if ((index = getIndexOfOption("-i", args)) == -1) {
 			System.err.println("Error: no input provided");
 			System.exit(-1);
 		} else
-			input = args[index+1];
+			inputPath = args[index+1];
 
 		Launcher spoon = new Launcher();
 
@@ -81,9 +81,13 @@ public class Main {
 		if (getIndexOfOption("-x", args) != -1)
 			spoon.getEnvironment().setNoClasspath(true);
 
-		spoon.addInputResource(input);
+		final String separator = System.getProperty("path.separator");
+		final String[] inputs = inputPath.split(separator);
+		for (String input : inputs) {
+			spoon.addInputResource(input);
+		}
 		if ((index = getIndexOfOption("-o", args)) == -1)
-			spoon.setSourceOutputDirectory(input);
+			spoon.setSourceOutputDirectory(inputPath);
 		else
 			spoon.setSourceOutputDirectory(args[index+1]);
 
