@@ -31,7 +31,7 @@ public class Main {
 
     public static boolean verbose = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         if (getIndexOfOption("-help", args) != -1 || getIndexOfOption("-h", args) != -1)
             usage();
@@ -91,7 +91,7 @@ public class Main {
 
     private static void run(int index, String[] args) {
 
-        // TODO
+        runNumberTask();
     }
 
     private static Explorer buildExp(int index, String[] args) {
@@ -204,8 +204,10 @@ public class Main {
         }
     }
 
-    public static void buildSubject(int index, String[] args) {
-        // TODO create the appropriate manager
+    public static void buildSubject(int index, String[] args) throws Exception {
+        // TODO: the name of the manager should be passed as paramater to the main
+	manager = (Manager) Main.class.getClassLoader().loadClass("QuickSortManager").getDeclaredConstructor(int.class, int.class, int.class).newInstance(numberOfTask, sizeOfTask, seed);
+
     }
 
     public static int getIndexOfOption(String opt, String[] args) {
