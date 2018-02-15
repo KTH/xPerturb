@@ -48,8 +48,7 @@ public class MainTest {
 		assertEquals("Numerical", Main2.exploration.getType());
 		assertEquals(10, result.getNumberOfTasks());
 
-		// there are 47 pertubations points, see QuickSortInstr
-		assertEquals(47, result.getNumberOfLocations());
+		assertEquals(41, result.getNumberOfLocations());
 
         assertEquals(1, result.searchSpaceSizePerMagnitude.length);
 		assertEquals(4331, result.searchSpaceSizePerMagnitude[0]);
@@ -57,6 +56,6 @@ public class MainTest {
 		assertEquals(3323, result.numberOfSuccessPerMagnitude[0]);
 
 		assertEquals(19, result.getAntifragilePoints().size());
-		assertEquals("2\tQuickSort.java:10\tNumerical", result.getAntifragilePoints().get(0).toString());
+		assertEquals("30\tend (/home/martin/martin-no-backup/jPerturb/src/main/java/quicksort/QuickSortInstr.java:32)\tNumerical", result.getAntifragilePoints().get(0).toString());
     }
 }

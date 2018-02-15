@@ -29,6 +29,8 @@ import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.reference.CtArrayTypeReference;
 import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
+import spoon.support.StandardEnvironment;
 
 import java.math.BigInteger;
 
@@ -41,6 +43,7 @@ public class PerturbationProcessor<T extends CtExpression> extends AbstractProce
     public void process(CtExpression ctExpression) {
 
         CtExpression expr = ctExpression.clone();
+        expr.putMetadata("orig", ctExpression.toString());
 
         expr.setParent(ctExpression.getParent());
 
