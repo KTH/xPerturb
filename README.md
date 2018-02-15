@@ -16,22 +16,7 @@ mvn test
 
 ## Usage
 
-usage:
-```
-java -jar target/jPerturb-0.0.1-SNAPSHOT-jar-with-dependencies.jar (-type <types>) (-r) -i <i> (-o <o>) (-x)
-```
-options:
-
-* -type <types>: every primitive type, separated by ":" (all primitive type will be processed by default)
-    * special token for \<type\>: IntNum it will process all integer expression (from byte to long, with java.util.BigInteger)
-* -r: will rename classes by adding "Instr" as suffix
-* -i \<i\>: path to classes to be perturbed
-* -o \<o\>: path to output (default is the same as \<i\>)
-* -x: no classpath mode of spoon
-
-Example:
-
-Process and inject perturbation to the resources classes used for test.
+To process and inject perturbation points to the resources classes used for test.
 
 ```
 java -jar target/jPerturb-0.0.1-SNAPSHOT-jar-with-dependencies.jar -type IntNum:boolean -i src/test/resources/ -o target/trash/
@@ -41,6 +26,12 @@ Process and inject perturbation to the resources classes used for test with rena
 
 ```
 java -jar target/jPerturb-0.0.1-SNAPSHOT-jar-with-dependencies.jar -r -type IntNum:boolean -i src/test/resources/ -o target/trash/
+```
+
+To perform the correctness attraction analysis:
+
+```
+mvn exec:java -Dexec.mainClass="experiment.Main2" -Dexec.args="-v -s quicksort.QuickSortManager -nb 10 -size 10 -exp call one"
 ```
 
 ## Experiments

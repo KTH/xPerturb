@@ -8,6 +8,7 @@ import perturbation.location.PerturbationLocation;
 import perturbation.log.LoggerImpl;
 import perturbation.perturbator.Perturbator;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,8 +79,9 @@ public class CallExplorer extends ExplorerImpl {
         int numberOfPerturbor = exploration.getPerturbators().size();
         String[] perturbatorsName = exploration.getPerturbatorsName();
         String campaignName = exploration.getName();
-
-        String pathToOutPutFile = "results/" + super.manager.getName() + "/" +
+        String dir = "results/" + super.manager.getName() + "/" ;
+        new File(dir).mkdirs();
+        String pathToOutPutFile = dir +
                 campaignName + "_" + this.name;
 
         int[] searchSpaceSizePerMagnitude = new int[numberOfPerturbor];

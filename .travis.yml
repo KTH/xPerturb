@@ -2,3 +2,9 @@ language: java
 
 jdk:
   - oraclejdk8
+
+script:
+  # executing the Junit tests
+  - mvn test
+  # also testing the main outside Junit
+  - mvn exec:java -Dexec.mainClass="experiment.Main2" -Dexec.args="-v -s quicksort.QuickSortManager -nb 5 -size 5 -exp call one"
