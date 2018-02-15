@@ -28,7 +28,7 @@ Process and inject perturbation to the resources classes used for test with rena
 java -jar target/jPerturb-0.0.1-SNAPSHOT-jar-with-dependencies.jar -r -type IntNum:boolean -i src/test/resources/ -o target/trash/
 ```
 
-To perform a correctness attraction analysis:
+To perform a correctness attraction analysis with `IntegerExplorationPlusOne`:
 
 ```
 mvn exec:java -Dexec.mainClass="experiment.Main2" -Dexec.args="-v -s quicksort.QuickSortManager -nb 10 -size 10 -exp call one"

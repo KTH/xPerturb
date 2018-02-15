@@ -81,8 +81,10 @@ public class Main2 {
         if ((currentIndex = getIndexOfOption("-exp", args)) != -1) {
             Explorer explorer = buildExp(currentIndex + 1, args);
             long time = System.currentTimeMillis();
+            // run the exploration of the perturbation space
             explorer.run();
             System.out.println(System.currentTimeMillis() - time + " ms");
+            explorer.log();
         } else if ((currentIndex = getIndexOfOption("-run", args)) != -1) {
             run(currentIndex + 1, args);
         }
@@ -199,8 +201,9 @@ public class Main2 {
             case "boolean":
                 typePerturbed = "Boolean";
                 return new BooleanExplorationNegation();
-            default:
+            case "one":
                 return new IntegerExplorationPlusOne();
+            default: throw new IllegalArgumentException("not recognized experiment");
         }
     }
 

@@ -34,6 +34,7 @@ public abstract class ExplorerImpl implements Explorer {
         this.name = name;
         this.manager = manager;
         this.outputs = new ArrayList<>();
+        this.initLogger();
     }
 
     protected Tuple run(int indexOfTask) {
@@ -93,12 +94,10 @@ public abstract class ExplorerImpl implements Explorer {
     @Override
     public void run() {
         System.out.println("Run " + this.toString() + " on " + this.manager.getCUP().getSimpleName() + " ...");
-        this.initLogger();
         @SuppressWarnings("unchecked")
         List<Integer> indices = this.manager.getIndexTask();
         for (int i = 0 ; i < indices.size() ; i++) {
             this.runTask(i);
-            log();
         }
     }
 
