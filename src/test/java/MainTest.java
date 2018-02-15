@@ -56,5 +56,7 @@ public class MainTest {
 		assertEquals(1, result.numberOfSuccessPerMagnitude.length);
 		assertEquals(3323, result.numberOfSuccessPerMagnitude[0]);
 
+		assertEquals(19, result.getAntifragilePoints().size());
+		assertEquals("2\tQuickSort.java:10\tNumerical", result.getAntifragilePoints().get(0).toString());
     }
 }

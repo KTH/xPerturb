@@ -7,6 +7,7 @@ import perturbation.location.PerturbationLocation;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,10 +66,14 @@ public class Logger {
         return results.length;
     }
 
+    public int getNumberOfPerturbators() {
+        return results[0][0].length;
+    }
+
     public Tuple[][][][] getResults() {
         int numberOfLocations = getNumberOfLocations();
         int numberOfTask = getNumberOfTasks();
-        int numberOfPerturbator = results[0][0].length;
+        int numberOfPerturbator = getNumberOfPerturbators();
         int numberOfEnactor = results[0][0][0].length;
         Tuple[][][][] tupleResults = new Tuple[results.length][numberOfLocations][numberOfTask][results[0][0][0].length];
         for (int indexLocation = 0 ; indexLocation < numberOfLocations ; indexLocation ++) {
@@ -102,6 +107,23 @@ public class Logger {
     }
 
     public static double TOLERANCE = 70.0f;
+
+    public List<PerturbationLocation> getAntifragilePoints() {
+        List<PerturbationLocation> l = new ArrayList<>();
+        for (int indexLocation = 0 ; indexLocation < getNumberOfLocations(); indexLocation ++) {
+            Tuple resultForLocation = new Tuple(6);
+            for (int indexPerturbator = 0; indexPerturbator < getNumberOfPerturbators(); indexPerturbator++) {
+                Tuple result = new Tuple(6);
+                for (int indexTask = 0; indexTask < getNumberOfTasks(); indexTask++) {
+                    result = result.add(results[indexLocation][indexTask][indexPerturbator][0].toTuple());
+                }
+                resultForLocation = resultForLocation.add(result);
+            }
+            if (resultForLocation.get(0) == resultForLocation.get(5) && resultForLocation.get(0) != 0)//Super - Antifragile
+                l.add(this.manager.getLocations().get(indexLocation));
+        }
+        return l;
+    }
 
     public static void addToFragilityList(Tuple result, long total, PerturbationLocation location,
                                    List<PerturbationLocation> locationExceptionFragile, List<PerturbationLocation> locationSuperAntiFragile,

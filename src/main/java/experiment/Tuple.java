@@ -20,6 +20,9 @@ public class Tuple {
     }
 
     public Tuple add(Tuple that) {
+        if (this.length() != that.length()) {
+            throw new IllegalArgumentException();
+        }
         Tuple add = new Tuple(this.values.length);
         for (int i = 0; i < Math.min(this.values.length, that.values.length) ; i++)
             add.values[i] = this.values[i] + that.values[i];

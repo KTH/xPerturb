@@ -122,9 +122,9 @@ public class CallExplorer extends ExplorerImpl {
                     "#Call",
                     "%Success") + "\n");
             for (PerturbationLocation location : locations) {
-                Tuple resultForLocation = new Tuple(3);
+                Tuple resultForLocation = new Tuple(6);
                 for (int indexPerturbator = 0; indexPerturbator < numberOfPerturbor; indexPerturbator++) {
-                    Tuple result = new Tuple(5);
+                    Tuple result = new Tuple(6);
                     for (int indexTask = 0; indexTask < super.manager.getIndexTask().size(); indexTask++) {
                         result = result.add(results[super.manager.getLocations().indexOf(location)][indexTask][indexPerturbator][0]);
                     }
