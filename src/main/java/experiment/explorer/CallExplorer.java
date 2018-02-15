@@ -51,13 +51,13 @@ public class CallExplorer extends ExplorerImpl {
         location.setPerturbator(perturbator);
         for (int indexOfCall = 0; indexOfCall < currentNbCall; indexOfCall++) {
             PerturbationEngine.loggers.get(super.name).logOn(location);
-            Tuple result = runAtTheIndexOfCall(indexOfCall, indexOfTask, location);
+            RunResult result = runAtTheIndexOfCall(indexOfCall, indexOfTask, location);
             super.logger.log(super.manager.getLocations().indexOf(location), indexOfTask, super.perturbators.indexOf(perturbator), 0, result, super.name);
             PerturbationEngine.loggers.get(super.name).reset();
         }
     }
 
-    private Tuple runAtTheIndexOfCall(int indexOfCall, int indexOfTask, PerturbationLocation location) {
+    private RunResult runAtTheIndexOfCall(int indexOfCall, int indexOfTask, PerturbationLocation location) {
         location.setEnactor(new NCallEnactorImpl(indexOfCall));
         return this.run(indexOfTask);
     }

@@ -66,7 +66,7 @@ public class RandomExplorer extends ExplorerImpl {
     @Override
     public int runReference(int indexOfTask, PerturbationLocation location) {
         PerturbationEngine.loggers.get(super.name).logOn(location);
-        Tuple result = super.run(indexOfTask);
+        RunResult result = super.run(indexOfTask);
         super.logger.log(super.manager.getLocations().indexOf(location), super.manager.getIndexTask().indexOf(indexOfTask), 0, 0, result, super.name);
         PerturbationEngine.loggers.get(super.name).reset();
         return PerturbationEngine.loggers.get(name).getCalls(location);
@@ -91,7 +91,7 @@ public class RandomExplorer extends ExplorerImpl {
         location.setEnactor(enactorsOfLocationPerRandomRates[indexLocation][indexRandomRate]);
         for (int i = 0; i < numberOfRepeat; i++) {
             PerturbationEngine.loggers.get(super.name).logOn(location);
-            Tuple result = super.run(indexOfTask);
+            RunResult result = super.run(indexOfTask);
             super.logger.log(super.manager.getLocations().indexOf(location),
                     super.manager.getIndexTask().indexOf(indexOfTask), perturbator, indexRandomRate + 1, result, super.name);
             PerturbationEngine.loggers.get(super.name).reset();

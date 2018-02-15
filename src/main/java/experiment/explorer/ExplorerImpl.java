@@ -37,8 +37,8 @@ public abstract class ExplorerImpl implements Explorer {
         this.initLogger();
     }
 
-    protected Tuple run(int indexOfTask) {
-        Tuple result = new Tuple(3);
+    protected RunResult run(int indexOfTask) {
+        RunResult result = new RunResult();
         ExecutorService executor = Executors.newSingleThreadExecutor();
         try {
             Callable instanceRunner = this.manager.getCallable(this.manager.getTask(indexOfTask));
@@ -49,22 +49,22 @@ public abstract class ExplorerImpl implements Explorer {
                 boolean assertion = this.manager.getOracle().assertPerturbation(this.manager.getTask(indexOfTask), output);
                 executor.shutdownNow();
                 if (assertion)
-                    result.set(0, 1); // success
+                    result.isSuccess = true; // success
                 else {
-                    result.set(1, 1); // failures
+                    result.isFailure = true; // failures
                     this.manager.recover();
                 }
                 return result;
             } catch (TimeoutException e) {
                 future.cancel(true);
-                result.set(2, 1); // error computation time
+                result.isException = true; // error computation time
                 System.err.println("Time out!");
                 executor.shutdownNow();
                 this.manager.recover();
                 return result;
             }
         } catch (Exception | Error e) {
-            result.set(2, 1);
+            result.isException = true;
             executor.shutdownNow();
 //            e.printStackTrace();
             this.manager.recover();
