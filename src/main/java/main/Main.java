@@ -37,25 +37,45 @@ public class Main {
 		System.exit(0);
 	}
 
-	public static void main(String[] args) {
+	final public Launcher spoon = new Launcher();
 
+	public Main() {
+		UtilPerturbation.perturbableTypes.clear();
+		spoon.addProcessor(new AssignmentProcessor());
+		spoon.addProcessor(new VariableCaster());
+		spoon.addProcessor(new PerturbationProcessor());
+		// by default only int types are transformed
+		addPerturbedType("int");
+		spoon.getEnvironment().setAutoImports(true);
+		spoon.getEnvironment().setLevel(Level.ALL.toString());
+	}
+
+	public void addPerturbedType(String type) {
+		UtilPerturbation.perturbableTypes.add(type);
+	}
+
+	public void addInputResource(String input) {
+		spoon.addInputResource(input);
+	}
+
+	public static void main(String[] args) {
+		Main main = new Main();
 		if (getIndexOfOption("-help", args) != -1 || getIndexOfOption("-h", args) != -1)
 			usage();
 
 		int index;
 		if ((index = getIndexOfOption("-type", args)) != -1) {
-			UtilPerturbation.perturbableTypes.clear();
 			String[] types = args[index + 1].split(":");
 			for (int i = 0; i < types.length; i++) {
 				if (types[i].equals("IntNum")) {
-					UtilPerturbation.perturbableTypes.add("byte");
-					UtilPerturbation.perturbableTypes.add("short");
-					UtilPerturbation.perturbableTypes.add("int");
-					UtilPerturbation.perturbableTypes.add("Integer");
-					UtilPerturbation.perturbableTypes.add("BigInteger");
-					UtilPerturbation.perturbableTypes.add("long");
+					main.addPerturbedType("byte");
+					main.addPerturbedType("short");
+					main.addPerturbedType("int");
+					main.addPerturbedType("Integer");
+					main.addPerturbedType("BigInteger");
+					main.addPerturbedType("long");
 				} else {
-					UtilPerturbation.perturbableTypes.add(types[i]);
+					main.addPerturbedType(types[i]);
 				}
 			}
 		}
@@ -69,31 +89,28 @@ public class Main {
 		} else
 			inputPath = args[index+1];
 
-		Launcher spoon = new Launcher();
-
-		spoon.addProcessor(new AssignmentProcessor());
-		spoon.addProcessor(new VariableCaster());
-		spoon.addProcessor(new PerturbationProcessor());
 		if (getIndexOfOption("-r", args) != -1)
-			spoon.addProcessor(new RenameProcessor());
+			main.spoon.addProcessor(new RenameProcessor());
 
-		spoon.getEnvironment().setAutoImports(true);
 		if (getIndexOfOption("-x", args) != -1)
-			spoon.getEnvironment().setNoClasspath(true);
+			main.spoon.getEnvironment().setNoClasspath(true);
 
 		final String separator = System.getProperty("path.separator");
 		final String[] inputs = inputPath.split(separator);
 		for (String input : inputs) {
-			spoon.addInputResource(input);
+			main.addInputResource(input);
 		}
+
 		if ((index = getIndexOfOption("-o", args)) == -1)
-			spoon.setSourceOutputDirectory(inputPath);
+			main.spoon.setSourceOutputDirectory(inputPath);
 		else
-			spoon.setSourceOutputDirectory(args[index+1]);
+			main.spoon.setSourceOutputDirectory(args[index+1]);
 
-		spoon.getEnvironment().setLevel(Level.ALL.toString());
-
-		spoon.run();
+		main.spoon.run();
 	}
 
+	// run the transformation
+	public void run() {
+		spoon.run();
+	}
 }

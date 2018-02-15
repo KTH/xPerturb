@@ -81,6 +81,10 @@ public class UtilPerturbation {
 	 * Supported type by default
 	 */
 	static {
+		reinitPerturbableTypes();
+	}
+
+	public static void reinitPerturbableTypes() {
 		perturbableTypes.add("char");
 
 		perturbableTypes.add("byte");
