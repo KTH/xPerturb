@@ -201,8 +201,6 @@ public class Main2 {
             case "boolean":
                 typePerturbed = "Boolean";
                 return new BooleanExplorationNegation();
-            case "one":
-                return new IntegerExplorationPlusOne();
             default: throw new IllegalArgumentException("not recognized experiment");
         }
     }

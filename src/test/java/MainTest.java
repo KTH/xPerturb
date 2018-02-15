@@ -39,6 +39,6 @@ public class MainTest {
     public void testMain() throws Exception {
         // this is an example of performing a complete exploration of the perturbation space
         // contract: the main does not throw an exception
-        experiment.Main2.main(new String[] {"-v", "-s", "quicksort.QuickSortManager", "-nb", "10", "-size", "10", "-exp", "call", "one"});
+        experiment.Main2.main(new String[] {"-v", "-s", "quicksort.QuickSortManager", "-nb", "10", "-size", "10", "-exp", "call", "pone"});
     }
 }

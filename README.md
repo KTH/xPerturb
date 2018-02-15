@@ -31,7 +31,7 @@ java -jar target/jPerturb-0.0.1-SNAPSHOT-jar-with-dependencies.jar -r -type IntN
 To perform a correctness attraction analysis with `IntegerExplorationPlusOne`:
 
 ```
-mvn exec:java -Dexec.mainClass="experiment.Main2" -Dexec.args="-v -s quicksort.QuickSortManager -nb 10 -size 10 -exp call one"
+mvn exec:java -Dexec.mainClass="experiment.Main2" -Dexec.args="-v -s quicksort.QuickSortManager -nb 10 -size 10 -exp call pone"
 ```
 
 ## Usage with API
