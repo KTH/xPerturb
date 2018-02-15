@@ -60,6 +60,8 @@ public class RandomExplorer extends ExplorerImpl {
             }
         }
 
+        this.initLogger();
+
         PerturbationEngine.loggers.put(super.name, new LoggerImpl());
     }
 
@@ -68,8 +70,9 @@ public class RandomExplorer extends ExplorerImpl {
         PerturbationEngine.loggers.get(super.name).logOn(location);
         RunResult result = super.run(indexOfTask);
         super.logger.log(super.manager.getLocations().indexOf(location), super.manager.getIndexTask().indexOf(indexOfTask), 0, 0, result, super.name);
+        int res = PerturbationEngine.loggers.get(super.name).getCalls(location);
         PerturbationEngine.loggers.get(super.name).reset();
-        return PerturbationEngine.loggers.get(name).getCalls(location);
+        return res;
     }
 
     @Override
@@ -173,9 +176,9 @@ public class RandomExplorer extends ExplorerImpl {
                     "%Success") + "\n");
 
             for (PerturbationLocation location : locations) {
-                Tuple resultForLocation = new Tuple(3);
+                Tuple resultForLocation = new Tuple(6);
                 for (int indexRandomRates = 0; indexRandomRates < randomRates.length + 1; indexRandomRates++) {
-                    Tuple result = new Tuple(5);
+                    Tuple result = new Tuple(6);
                     for (int indexPerturbator = 0; indexPerturbator < numberOfPerturbor; indexPerturbator++) {
                         for (int indexTask = 0; indexTask <super.manager.getIndexTask().size(); indexTask++)
                             result = result.add(results[super.manager.getLocations().indexOf(location)][indexTask][indexPerturbator][indexRandomRates]);
@@ -221,7 +224,7 @@ public class RandomExplorer extends ExplorerImpl {
                             "#Execs", "#Tasks", "%Success") + "\n");
 
                     for (PerturbationLocation location : locations) {
-                        Tuple result = new Tuple(5);
+                        Tuple result = new Tuple(6);
                         int accNbOfTasks = 0;
                         for (int indexTask = 0; indexTask <super.manager.getIndexTask().size(); indexTask++) {
                             result = result.add(results[super.manager.getLocations().indexOf(location)][indexTask][indexPerturbator][indexRandomRates + 1]);

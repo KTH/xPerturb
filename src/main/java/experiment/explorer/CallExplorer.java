@@ -25,6 +25,7 @@ public class CallExplorer extends ExplorerImpl {
     public CallExplorer(Manager manager, Exploration exploration) {
         super(manager, exploration, "CallExplorer");
         nbCallReferencePerLocationPerTask = new long[super.manager.getLocations().size()][super.manager.getIndexTask().size()];
+        this.initLogger();
     }
 
     @Override

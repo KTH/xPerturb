@@ -34,7 +34,6 @@ public abstract class ExplorerImpl implements Explorer {
         this.name = name;
         this.manager = manager;
         this.outputs = new ArrayList<>();
-        this.initLogger();
     }
 
     protected RunResult run(int indexOfTask) {

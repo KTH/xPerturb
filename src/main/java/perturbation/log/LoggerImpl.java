@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class LoggerImpl implements Logger {
 
-    private Map<PerturbationLocation, Integer> numberOfCallsPerLocation = new HashMap<PerturbationLocation, Integer>();
-    private Map<PerturbationLocation, Integer> numberOfEnactionsPerLocation = new HashMap<PerturbationLocation, Integer>();
+    private final Map<PerturbationLocation, Integer> numberOfCallsPerLocation = new HashMap<PerturbationLocation, Integer>();
+    private final Map<PerturbationLocation, Integer> numberOfEnactionsPerLocation = new HashMap<PerturbationLocation, Integer>();
 
     @Override
     public void logOn(PerturbationLocation location) {
