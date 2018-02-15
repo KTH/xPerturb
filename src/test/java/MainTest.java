@@ -37,7 +37,7 @@ public class MainTest {
 
     @Test
     public void testMain() throws Exception {
-        // this is an example of performing a complete exploration of the perturbation space
+        // this is an example of performing a complete exploration of the perturbation space with PONE
         // contract: the main does not throw an exception
         experiment.Main2.main(new String[] {"-v", "-s", "quicksort.QuickSortManager", "-nb", "10", "-size", "10", "-exp", "call", "pone"});
     }
