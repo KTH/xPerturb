@@ -33,8 +33,6 @@ public interface Manager<T, P> {
      */
     List<PerturbationLocation> getLocations(String filter);
 
-    void setLocations(List<PerturbationLocation> locations);
-
     List<Integer> getIndexTask();
 
     void setIndexTask(List<Integer> tasks);

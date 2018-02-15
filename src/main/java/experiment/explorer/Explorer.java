@@ -1,5 +1,6 @@
 package experiment.explorer;
 
+import experiment.Logger;
 import perturbation.location.PerturbationLocation;
 
 /**
@@ -11,7 +12,7 @@ public interface Explorer {
     /**
      * Run the explorer
      */
-    void run();
+    Logger run();
 
     /**
      * Method to run one time the subject on a task without any perturbation.
@@ -27,6 +28,4 @@ public interface Explorer {
      * Output the logging after that the Explorer rand
      */
     void log();
-
-
 }

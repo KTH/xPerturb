@@ -92,13 +92,14 @@ public abstract class ExplorerImpl implements Explorer {
     }
 
     @Override
-    public void run() {
+    public Logger run() {
         System.out.println("Run " + this.toString() + " on " + this.manager.getCUP().getSimpleName() + " ...");
         @SuppressWarnings("unchecked")
         List<Integer> indices = this.manager.getIndexTask();
         for (int i = 0 ; i < indices.size() ; i++) {
             this.runTask(i);
         }
+        return logger;
     }
 
     @Override

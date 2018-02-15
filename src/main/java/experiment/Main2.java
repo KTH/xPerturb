@@ -31,6 +31,8 @@ public class Main2 {
 
     public static boolean verbose = false;
 
+    public static Logger lastResultOfMainCall;
+
     public static void main(String[] args) throws Exception {
 
         if (getIndexOfOption("-help", args) != -1 || getIndexOfOption("-h", args) != -1)
@@ -82,7 +84,7 @@ public class Main2 {
             Explorer explorer = buildExp(currentIndex + 1, args);
             long time = System.currentTimeMillis();
             // run the exploration of the perturbation space
-            explorer.run();
+            lastResultOfMainCall = explorer.run();
             System.out.println(System.currentTimeMillis() - time + " ms");
             explorer.log();
         } else if ((currentIndex = getIndexOfOption("-run", args)) != -1) {

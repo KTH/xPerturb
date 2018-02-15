@@ -85,9 +85,6 @@ public class CallExplorer extends ExplorerImpl {
         String pathToOutPutFile = dir +
                 campaignName + "_" + this.name;
 
-        int[] searchSpaceSizePerMagnitude = new int[numberOfPerturbor];
-        int[] numberOfSuccessPerMagnitude = new int[numberOfPerturbor];
-
         try {
             FileWriter writer = new FileWriter(pathToOutPutFile + "_detail.txt", false);
             String format = "%-4s %-" + (exploration.getColumnName().length() + 1) + "s %-10s %-10s %-10s %-10s %-10s %-14s %-27s";
@@ -102,8 +99,8 @@ public class CallExplorer extends ExplorerImpl {
                 for (PerturbationLocation location : locations) {
                     for (int indexPerturbator = 0; indexPerturbator < numberOfPerturbor; indexPerturbator++) {
                         Tuple result = results[super.manager.getLocations().indexOf(location)][indexTask][indexPerturbator][0];
-                        searchSpaceSizePerMagnitude[indexPerturbator] += result.get(5);
-                        numberOfSuccessPerMagnitude[indexPerturbator] += result.get(0);
+                        logger.searchSpaceSizePerMagnitude[indexPerturbator] += result.get(5);
+                        logger.numberOfSuccessPerMagnitude[indexPerturbator] += result.get(0);
                         writer.write(String.format(format,
                                 indexTask, perturbatorsName[indexPerturbator], location.getLocationIndex(),
                                 result.get(0), result.get(1), result.get(2),
@@ -150,9 +147,9 @@ public class CallExplorer extends ExplorerImpl {
                 sb.write("detail of space for " + this.name + " with " + exploration.getColumnName() + " = " + perturbatorsName[indexPerturbator] + "\n");
                 sb.write(String.format(format, "number of Task : ", super.manager.getIndexTask().size()) + "\n");
                 sb.write(String.format(format, "number of Locations : ", super.manager.getLocations().size()) + "\n");
-                sb.write(String.format(format, "number of executions done : ", searchSpaceSizePerMagnitude[indexPerturbator]) + "\n");
-                sb.write(String.format(format, "number of successful executions done : ", numberOfSuccessPerMagnitude[indexPerturbator]) + "\n");
-                sb.write(String.format(format, "% Success : ", Util.getStringPerc(numberOfSuccessPerMagnitude[indexPerturbator], searchSpaceSizePerMagnitude[indexPerturbator])) + "\n");
+                sb.write(String.format(format, "number of executions done : ", logger.searchSpaceSizePerMagnitude[indexPerturbator]) + "\n");
+                sb.write(String.format(format, "number of successful executions done : ", logger.numberOfSuccessPerMagnitude[indexPerturbator]) + "\n");
+                sb.write(String.format(format, "% Success : ", Util.getStringPerc(logger.numberOfSuccessPerMagnitude[indexPerturbator], logger.searchSpaceSizePerMagnitude[indexPerturbator])) + "\n");
                 // writing to console and to file
                 System.out.println(sb.toString());
                 writer.write(sb.toString());

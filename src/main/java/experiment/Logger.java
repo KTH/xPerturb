@@ -19,6 +19,10 @@ public class Logger {
      */
     private AggregatedResult[][][][] results;
 
+    final public int[] searchSpaceSizePerMagnitude;
+    final public int[] numberOfSuccessPerMagnitude;
+
+
     private Manager<?, ?> manager;
 
     /**
@@ -49,11 +53,21 @@ public class Logger {
                 }
             }
         }
+        searchSpaceSizePerMagnitude = new int[numberOfPerturbator];
+        numberOfSuccessPerMagnitude = new int[numberOfPerturbator];
+    }
+
+    public int getNumberOfTasks() {
+        return results[0].length;
+    }
+
+    public int getNumberOfLocations() {
+        return results.length;
     }
 
     public Tuple[][][][] getResults() {
-        int numberOfLocations = results.length;
-        int numberOfTask = results[0].length;
+        int numberOfLocations = getNumberOfLocations();
+        int numberOfTask = getNumberOfTasks();
         int numberOfPerturbator = results[0][0].length;
         int numberOfEnactor = results[0][0][0].length;
         Tuple[][][][] tupleResults = new Tuple[results.length][numberOfLocations][numberOfTask][results[0][0][0].length];

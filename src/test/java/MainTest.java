@@ -1,4 +1,5 @@
 
+import experiment.Logger;
 import experiment.Main2;
 import main.Main;
 import org.junit.After;
@@ -42,6 +43,18 @@ public class MainTest {
         // contract: the main does not throw an exception
         experiment.Main2.main(new String[] {"-v", "-s", "quicksort.QuickSortManager", "-nb", "10", "-size", "10", "-exp", "call", "pone"});
 
-        //assertEquals(31, Main2.);
+        Logger result = Main2.lastResultOfMainCall;
+
+		assertEquals("Numerical", Main2.exploration.getType());
+		assertEquals(10, result.getNumberOfTasks());
+
+		// there are 47 pertubations points, see QuickSortInstr
+		assertEquals(47, result.getNumberOfLocations());
+
+        assertEquals(1, result.searchSpaceSizePerMagnitude.length);
+		assertEquals(4331, result.searchSpaceSizePerMagnitude[0]);
+		assertEquals(1, result.numberOfSuccessPerMagnitude.length);
+		assertEquals(3323, result.numberOfSuccessPerMagnitude[0]);
+
     }
 }

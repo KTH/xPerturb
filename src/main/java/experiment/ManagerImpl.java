@@ -4,6 +4,7 @@ import perturbation.location.PerturbationLocation;
 import perturbation.location.PerturbationLocationImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -94,12 +95,7 @@ public abstract class ManagerImpl<T, P> implements Manager<T, P> {
 
     @Override
     public List<PerturbationLocation> getLocations() {
-        return this.locations;
-    }
-
-    @Override
-    public void setLocations(List<PerturbationLocation> locations) {
-        this.locations = locations;
+        return Collections.unmodifiableList(this.locations);
     }
 
     @Override
@@ -111,11 +107,11 @@ public abstract class ManagerImpl<T, P> implements Manager<T, P> {
 
     @Override
     public List<PerturbationLocation> getLocations(String filter) {
-        this.locations = this.locations.stream()
+        List<PerturbationLocation> result = this.locations.stream()
                 .filter(location -> location.getType().equals(filter))
                 .sorted(Comparator.comparingInt(PerturbationLocation::getLocationIndex))
                 .collect(Collectors.toList());
-        return this.locations;
+        return result;
     }
 
     @Override
