@@ -10,9 +10,9 @@ import experiment.explorer.TaskNumberExplorer;
 import experiment.explorer.TaskSizeExplorer;
 
 /**
- * Created by bdanglot on 02/05/16.
+ * Main, forked from experiment.Main in https://travis-ci.org/Spirals-Team/correctness-attraction-experiments/
  */
-public class Main {
+public class Main2 {
 
     public static Exploration exploration;
 
@@ -205,8 +205,7 @@ public class Main {
     }
 
     public static void buildSubject(int index, String[] args) throws Exception {
-        // TODO: the name of the manager should be passed as paramater to the main
-	manager = (Manager) Main.class.getClassLoader().loadClass("QuickSortManager").getDeclaredConstructor(int.class, int.class, int.class).newInstance(numberOfTask, sizeOfTask, seed);
+	manager = (Manager) Class.forName(args[index]).getDeclaredConstructor(int.class, int.class, int.class).newInstance(numberOfTask, sizeOfTask, seed);
 
     }
 

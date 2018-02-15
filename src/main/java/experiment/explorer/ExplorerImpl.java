@@ -43,7 +43,7 @@ public abstract class ExplorerImpl implements Explorer {
             Callable instanceRunner = this.manager.getCallable(this.manager.getTask(indexOfTask));
             Future future = executor.submit(instanceRunner);
             try {
-                Object output = (future.get(Main.numberOfSecondsToWait, TimeUnit.SECONDS));
+                Object output = (future.get(Main2.numberOfSecondsToWait, TimeUnit.SECONDS));
                 this.outputs.add(output);
                 boolean assertion = this.manager.getOracle().assertPerturbation(this.manager.getTask(indexOfTask), output);
                 executor.shutdownNow();
@@ -83,7 +83,7 @@ public abstract class ExplorerImpl implements Explorer {
         @SuppressWarnings("unchecked")
         List<PerturbationLocation> locations = this.manager.getLocations(this.exploration.getType());
         for (PerturbationLocation location : locations) {
-            if (Main.verbose)
+            if (Main2.verbose)
                 System.out.println(indexTask + " " + location.getLocationIndex() + " " + Util.getStringPerc(locations.indexOf(location), locations.size()));
             this.runReference(indexTask, location);
             this.runLocation(indexTask, location);
